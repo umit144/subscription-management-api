@@ -33,6 +33,6 @@ class Subscription extends Model
 
     public function application(): HasOne
     {
-        return $this->hasOne(Application::class);
+        return $this->hasOne(Application::class, 'id', 'application_id');
     }
 }

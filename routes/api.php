@@ -17,4 +17,5 @@ Route::middleware('auth:device')
     ->prefix('subscription')
     ->controller(SubscriptionController::class)->group(function () {
         Route::get('/check', 'check');
+        Route::post('/purchase', 'purchase');
     });
