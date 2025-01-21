@@ -15,13 +15,15 @@ class DeviceController extends Controller
                 'uid' => $request->get('uid'),
             ], $request->only(['uid', 'app_id', 'language', 'platform']));
 
-            $device->subscriptions()->firstOrCreate([
+            $subscription = $device->subscriptions()->firstOrCreate([
                 'application_id' => $request->app_id,
             ]);
 
+            $device->tokens()->whereSubscriptionId($subscription->id)->delete();
+
             return response()->json([
                 'success' => true,
-                'token' => $device->createToken('client-token')->plainTextToken,
+                'token' => $device->createClientToken('client-token', $subscription)->plainTextToken,
             ]);
         } catch (\Exception $exception) {
             return response()->json([
