@@ -16,7 +16,7 @@ class Subscription extends Model
         'device_id',
         'receipt_hash',
         'status',
-        'expire_date'
+        'expire_date',
     ];
 
     protected $casts = [

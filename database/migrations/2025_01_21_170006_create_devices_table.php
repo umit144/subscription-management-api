@@ -15,11 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('uid', 64);
             $table->string('app_id', 32);
-            $table->string('os', 10);
+            $table->string('platform', 10);
             $table->string('language', 5);
-            $table->string('client_token', 64)->unique();
             $table->index(['uid', 'app_id'], 'idx_uid_app');
-            $table->index('client_token', 'idx_client_token');
             $table->timestamps();
         });
     }

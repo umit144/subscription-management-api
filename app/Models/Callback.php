@@ -13,6 +13,6 @@ class Callback extends Model
 
     protected $fillable = [
         'app_id',
-        'endpoint_url'
+        'endpoint_url',
     ];
 }

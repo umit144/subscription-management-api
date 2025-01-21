@@ -2,23 +2,28 @@
 
 namespace App\Models;
 
+use App\Enums\Platform;
 use Database\Factories\DeviceFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Laravel\Sanctum\HasApiTokens;
 
 class Device extends Model
 {
     /** @use HasFactory<DeviceFactory> */
-    use HasFactory;
+    use HasApiTokens, HasFactory;
 
     protected $fillable = [
         'uid',
         'app_id',
-        'os',
+        'platform',
         'language',
-        'client_token'
+    ];
+
+    protected $casts = [
+        'platform' => Platform::class
     ];
 
     public function subscriptions(): HasMany
