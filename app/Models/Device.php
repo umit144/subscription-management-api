@@ -17,13 +17,13 @@ class Device extends Model
 
     protected $fillable = [
         'uid',
-        'app_id',
         'platform',
         'language',
+        'status',
     ];
 
     protected $casts = [
-        'platform' => Platform::class
+        'platform' => Platform::class,
     ];
 
     public function subscriptions(): HasMany

@@ -13,8 +13,11 @@ class DeviceController extends Controller
         try {
             $device = Device::firstOrCreate([
                 'uid' => $request->get('uid'),
-                'app_id' => $request->get('app_id'),
             ], $request->only(['uid', 'app_id', 'language', 'platform']));
+
+            $device->subscriptions()->firstOrCreate([
+                'application_id' => $request->app_id,
+            ]);
 
             return response()->json([
                 'success' => true,
