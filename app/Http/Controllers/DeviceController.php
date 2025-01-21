@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Device\RegisterRequest;
 use App\Models\Device;
+use Illuminate\Http\JsonResponse;
 
 class DeviceController extends Controller
 {
-    public function register(RegisterRequest $request)
+    public function register(RegisterRequest $request): JsonResponse
     {
         try {
             $device = Device::firstOrCreate([
