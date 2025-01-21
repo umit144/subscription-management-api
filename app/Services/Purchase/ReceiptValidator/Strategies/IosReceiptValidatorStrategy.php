@@ -14,7 +14,7 @@ readonly class IosReceiptValidatorStrategy implements ReceiptValidatorStrategy
 
     public function __construct(ApplicationCredentials $credentials)
     {
-        $this->client = Http::baseUrl(Config::get('app-store.url'))
+        $this->client = Http::baseUrl(Config::get('services.app-store.url'))
             ->withBasicAuth($credentials->username, $credentials->password);
     }
 

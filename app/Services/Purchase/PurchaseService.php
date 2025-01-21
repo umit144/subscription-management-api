@@ -23,8 +23,8 @@ readonly class PurchaseService
         $credentials = $subscription->application->credentials()->wherePlatform($platform)->first();
 
         $response = $this->receiptValidator
-            ->setPlatform($platform)
             ->setCredentials($credentials)
+            ->setPlatform($platform)
             ->validate($receipt);
 
         if ($response['status'] !== true) {

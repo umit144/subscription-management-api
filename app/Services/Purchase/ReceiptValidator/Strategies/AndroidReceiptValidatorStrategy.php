@@ -14,7 +14,7 @@ readonly class AndroidReceiptValidatorStrategy implements ReceiptValidatorStrate
 
     public function __construct(ApplicationCredentials $credentials)
     {
-        $this->client = Http::baseUrl(Config::get('google-play.url'))
+        $this->client = Http::baseUrl(Config::get('services.google-play.url'))
             ->withBasicAuth($credentials->username, $credentials->password);
     }
 
