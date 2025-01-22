@@ -17,7 +17,7 @@ class CallbackFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'endpoint_url' => $this->faker->url(),
         ];
     }
 }

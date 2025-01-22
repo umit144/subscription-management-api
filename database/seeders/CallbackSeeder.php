@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Callback;
 use Illuminate\Database\Seeder;
 
 class CallbackSeeder extends Seeder
@@ -11,6 +12,6 @@ class CallbackSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Callback::factory(10)->create();
     }
 }

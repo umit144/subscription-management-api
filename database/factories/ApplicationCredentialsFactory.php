@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\Platform;
+use App\Models\Application;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,10 @@ class ApplicationCredentialsFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'application_id' => Application::factory(),
+            'platform' => collect(Platform::cases())->pluck('value')->random(),
+            'username' => fake()->userName(),
+            'password' => fake()->password(),
         ];
     }
 }

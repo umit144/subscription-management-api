@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\Platform;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,9 @@ class DeviceFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'uid' => fake()->uuid(),
+            'platform' => collect(Platform::cases())->pluck('value')->random(),
+            'language' => fake()->languageCode(),
         ];
     }
 }
