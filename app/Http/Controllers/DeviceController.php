@@ -23,7 +23,7 @@ class DeviceController extends Controller
 
             return response()->json([
                 'success' => true,
-                'token' => $device->createClientToken('client-token', $subscription)->plainTextToken,
+                'token' => $device->createClientToken($subscription)->plainTextToken,
             ]);
         } catch (\Exception $exception) {
             return response()->json([
