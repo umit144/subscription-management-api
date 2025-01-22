@@ -36,10 +36,10 @@ return [
     ],
 
     'google-play' => [
-        'url' => 'http://localhost:8080',
+        'url' => 'http://host.docker.internal:8080',
     ],
 
     'app-store' => [
-        'url' => 'http://localhost:8080',
+        'url' => 'http://host.docker.internal:8080',
     ],
 ];
