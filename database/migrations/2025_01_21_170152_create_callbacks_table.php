@@ -13,9 +13,7 @@ return new class extends Migration
     {
         Schema::create('callbacks', function (Blueprint $table) {
             $table->id();
-            $table->string('app_id', 32);
-            $table->string('endpoint_url', 255);
-            $table->unique(['app_id'], 'unique_app_endpoint');
+            $table->string('endpoint_url', 255)->unique();
             $table->timestamps();
         });
     }

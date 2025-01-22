@@ -12,7 +12,6 @@ class Callback extends Model
     use HasFactory;
 
     protected $fillable = [
-        'app_id',
         'endpoint_url',
     ];
 }
