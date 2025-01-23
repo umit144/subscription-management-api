@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Device::class)->constrained();
             $table->foreignIdFor(Application::class)->constrained();
-            $table->uuid('receipt')->default(DB::raw('(UUID())'));
+            $table->uuid('receipt')->unique()->default(DB::raw('(UUID())'));
             $table->boolean('status')->default(false);
             $table->timestamp('expire_date')->nullable();
             $table->index(['expire_date', 'status']);

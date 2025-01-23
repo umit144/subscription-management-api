@@ -21,7 +21,6 @@ class SubscriptionFactory extends Factory
         return [
             'device_id' => Device::factory(),
             'application_id' => Application::factory(),
-            'receipt' => fake()->uuid(),
             'status' => fake()->boolean(),
             'expire_date' => fake()->dateTimeBetween('now', '+1 year'),
         ];
