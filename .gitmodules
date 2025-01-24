@@ -4,3 +4,6 @@
 [submodule "notification-service"]
 	path = notification-service
 	url = git@github.com:umit144/notification-service.git
+[submodule "subscription-worker"]
+	path = subscription-worker
+	url = git@github.com:umit144/subscription-worker.git

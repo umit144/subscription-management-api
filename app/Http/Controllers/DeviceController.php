@@ -16,7 +16,7 @@ class DeviceController extends Controller
             ], $request->only(['uid', 'app_id', 'language', 'platform']));
 
             $subscription = $device->subscriptions()->firstOrCreate([
-                'application_id' => $request->app_id,
+                'application_id' => $request->get('app_id'),
             ]);
 
             $device->tokens()->whereSubscriptionId($subscription->id)->delete();
