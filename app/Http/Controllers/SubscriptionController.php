@@ -12,24 +12,38 @@ class SubscriptionController extends Controller
 {
     public function check(Request $request): JsonResponse
     {
-        $subscription = Subscription::find(
-            $request->user('device')->currentAccessToken()->subscription_id
-        );
+        try {
+            $subscription = Subscription::find(
+                $request->user('device')->currentAccessToken()->subscription_id
+            );
 
-        return new JsonResponse([
-            'isActive' => $subscription->status,
-        ]);
+            return new JsonResponse([
+                'isActive' => $subscription->status,
+            ]);
+        } catch (\Exception $exception) {
+            return new JsonResponse([
+                'success' => false,
+                'message' => $exception->getMessage(),
+            ]);
+        }
     }
 
     public function purchase(PurchaseRequest $request, PurchaseService $purchaseService): JsonResponse
     {
-        $subscription = $purchaseService->process(
-            $request->string('receipt')
-        );
+        try {
+            $subscription = $purchaseService->process(
+                $request->string('receipt')
+            );
 
-        return new JsonResponse([
-            'success' => true,
-            'expiresAt' => $subscription->expire_date,
-        ]);
+            return new JsonResponse([
+                'success' => true,
+                'expiresAt' => $subscription->expire_date,
+            ]);
+        } catch (\Exception $exception) {
+            return new JsonResponse([
+                'success' => false,
+                'message' => $exception->getMessage(),
+            ]);
+        }
     }
 }

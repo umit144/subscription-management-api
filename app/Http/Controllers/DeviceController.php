@@ -21,12 +21,12 @@ class DeviceController extends Controller
 
             $device->tokens()->whereSubscriptionId($subscription->id)->delete();
 
-            return response()->json([
+            return new JsonResponse([
                 'success' => true,
                 'token' => $device->createClientToken($subscription)->plainTextToken,
             ]);
         } catch (\Exception $exception) {
-            return response()->json([
+            return new JsonResponse([
                 'success' => false,
                 'message' => $exception->getMessage(),
             ]);
