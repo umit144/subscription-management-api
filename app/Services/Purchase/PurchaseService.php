@@ -2,6 +2,8 @@
 
 namespace App\Services\Purchase;
 
+use App\Models\Application;
+use App\Models\Device;
 use App\Models\Subscription;
 use App\Services\Purchase\ReceiptValidator\ReceiptValidatorContext;
 use Carbon\Carbon;
@@ -16,11 +18,10 @@ readonly class PurchaseService
     /**
      * @throws Exception
      */
-    public function process(string $receipt): Subscription
+    public function process(Device $device, Application $application, string $receipt): Subscription
     {
-        $subscription = Subscription::whereReceipt($receipt)->first();
-        $platform = $subscription->device->platform;
-        $credentials = $subscription->application->credentials()->wherePlatform($platform)->first();
+        $platform = $device->platform;
+        $credentials = $application->credentials()->wherePlatform($platform)->first();
 
         $response = $this->receiptValidator
             ->setCredentials($credentials)
@@ -37,11 +38,13 @@ readonly class PurchaseService
             'America/Chicago'
         )->setTimezone('UTC');
 
-        $subscription->update([
+        return $device->subscriptions()->updateOrCreate([
+            'receipt' => $receipt,
+        ], [
+            'receipt' => $receipt,
+            'application_id' => $application->id,
             'status' => true,
             'expire_date' => $expireDate,
         ]);
-
-        return $subscription;
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Subscription;
 
-use App\Models\Subscription;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,7 +23,7 @@ class PurchaseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'receipt' => ['required', 'exists:'.Subscription::class.',receipt'],
+            'receipt' => ['required', 'string'],
         ];
     }
 }

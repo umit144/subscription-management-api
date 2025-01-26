@@ -41,7 +41,7 @@ class Device extends Model
             ->latest();
     }
 
-    public function createClientToken(Subscription $subscription, array $abilities = ['*'], ?DateTimeInterface $expiresAt = null): NewAccessToken
+    public function createClientToken(Application $application, array $abilities = ['*'], ?DateTimeInterface $expiresAt = null): NewAccessToken
     {
         $plainTextToken = $this->generateTokenString();
 
@@ -50,7 +50,7 @@ class Device extends Model
             'token' => hash('sha256', $plainTextToken),
             'abilities' => $abilities,
             'expires_at' => $expiresAt,
-            'subscription_id' => $subscription->id,
+            'application_id' => $application->id,
         ]);
 
         return new NewAccessToken($token, $token->getKey().'|'.$plainTextToken);

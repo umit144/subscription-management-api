@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Subscription\PurchaseRequest;
-use App\Models\Subscription;
 use App\Services\Purchase\PurchaseService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -13,12 +12,12 @@ class SubscriptionController extends Controller
     public function check(Request $request): JsonResponse
     {
         try {
-            $subscription = Subscription::find(
-                $request->user('device')->currentAccessToken()->subscription_id
-            );
+            $device = $request->user('device');
+            $application = $device->currentAccessToken()->application;
+            $subscription = $device->subscriptions()->whereApplicationId($application->id)->first();
 
             return new JsonResponse([
-                'isActive' => $subscription->status,
+                'isActive' => (bool) $subscription?->status,
             ]);
         } catch (\Exception $exception) {
             return new JsonResponse([
@@ -32,6 +31,8 @@ class SubscriptionController extends Controller
     {
         try {
             $subscription = $purchaseService->process(
+                $request->user('device'),
+                $request->user('device')->currentAccessToken()->application,
                 $request->string('receipt')
             );
 

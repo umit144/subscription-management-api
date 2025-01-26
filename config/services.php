@@ -36,10 +36,10 @@ return [
     ],
 
     'google-play' => [
-        'url' => 'http://host.docker.internal:8081',
+        'url' => 'http://mock-api:8081',
     ],
 
     'app-store' => [
-        'url' => 'http://host.docker.internal:8081',
+        'url' => 'http://mock-api:8081',
     ],
 ];
