@@ -36,10 +36,10 @@ return [
     ],
 
     'google-play' => [
-        'url' => 'http://mock-api:8081',
+        'url' => 'http://mock-api',
     ],
 
     'app-store' => [
-        'url' => 'http://mock-api:8081',
+        'url' => 'http://mock-api',
     ],
 ];
