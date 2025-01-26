@@ -16,12 +16,17 @@ docker run --rm \
     composer install --ignore-platform-reqs
 ```
 
-2. **Start Docker Containers**
+2. **Setup env file**
+```bash
+cp .env.example .env
+```
+
+3. **Start Docker Containers**
 ```bash
 ./vendor/bin/sail up -d
 ```
 
-3. **Setup Database**
+4. **Setup Database**
 ```bash
 ./vendor/bin/sail artisan migrate --seed
 ```
